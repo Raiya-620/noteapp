@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -37,10 +37,14 @@ class _HomeScreenState extends State<HomeScreen> {
       body: noteHeading.length > 0
       ? buildNotes()
       :const Center(
-        child: Text('Add Notes...'),
+        child: Text('Add Notes...',
+        style: TextStyle(
+          color: Colors.white
+        ),
+        ),
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.grey,
           onPressed: (){
             _settingModalBottomSheet(context);
           },
@@ -238,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   noteHeading.add(noteHeadingController.text);
                                   noteDescription.add(noteDiscriptionController.text);
                                   noteHeadingController.clear();
-                                  noteDescription.clear();
+                                  noteDiscriptionController.clear();
                                 });
                                 Navigator.pop(context);
                               }
@@ -275,7 +279,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           prefixIcon: Icon(Icons.text_fields),
                       ),
-                      validator: (noteHeading) {
+                      validator: ( noteHeading) {
                         if(noteHeading!.isEmpty){
                           return "Enter Note Heading";
                         }
@@ -294,10 +298,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 5*24,
                       child: TextFormField(
                         focusNode: textSecondFocusNode,
-                        maxLines: notesDescriptionMaxLength,
+                        maxLines: notesDescriptionMaxLines,
                         maxLength: notesDescriptionMaxLength,
                         controller: noteDiscriptionController,
-                        decoration: const InputDecoration(border: 
+                        decoration: const InputDecoration(
+                          border: 
                         OutlineInputBorder(),
                         hintText: "Description",
                         hintStyle: TextStyle(
@@ -334,13 +339,13 @@ Widget notesHeader(){
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Note',
+        Text('Notes',
         style: TextStyle(
-          color: Colors.blueAccent,
+          color: Colors.white,
           fontSize: 25,
-          fontWeight: FontWeight.w500),
+          fontWeight: FontWeight.w900),
           ),
-          Divider(color: Colors.blueAccent,
+          Divider(color: Colors.grey,
           thickness: 2.5,
           )
       ],
